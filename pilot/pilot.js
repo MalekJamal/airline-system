@@ -1,9 +1,9 @@
 "use strict";
 
-const { events } = require("./events");
+const { events } = require("../events");
 
-require("./system");
-require("./manager");
+require("../system/system");
+require("../manager/manager");
 
 events.on("new-flight", (flightInfo)=>{
 

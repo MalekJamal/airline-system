@@ -1,7 +1,7 @@
 "use strict";
 
 const { faker } = require("@faker-js/faker");
-const { events } = require("./events");
+const { events } = require("../events");
 const uuid = require("uuid");
 const id = uuid.v4();
 
