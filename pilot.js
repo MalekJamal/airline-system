@@ -7,13 +7,14 @@ require("./manager");
 
 events.on("new-flight", (flightInfo)=>{
 
-    setInterval(()=>{
-        console.log(`pilot:flight '${flightInfo.id}' took of`)
-		events.emit('took-off', flightInfo)
+    setTimeout(()=>{
+		events.emit('took-off', flightInfo);
+        console.log(`pilot: flight '${flightInfo.id}' took of.`);
     }, 4000);
 
-    setInterval(()=>{
-        console.log(`piolt:fligth '${flightInfo.id}' arrived`)
-		events.emit('arrived', flightInfo)
-    }, 7000)
-})
+    setTimeout(()=>{
+		events.emit('arrived', flightInfo);
+        console.log(`piolt: flight '${flightInfo.id}' arrived.`);
+    }, 7000);
+    
+});
