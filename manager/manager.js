@@ -1,24 +1,23 @@
 "use strict";
 
 const { faker } = require("@faker-js/faker");
-const { events } = require("../events");
 const uuid = require("uuid");
-const id = uuid.v4();
-
+const io = require("socket.io-client");
+require('dotenv').config();
+const socket = io.connect(`${process.env.SERVER_URL}`);
 
 setInterval(() => {
     const flightInfo = {
-        id: id,
+        id: uuid.v4(),
         airline: `Royal Jordanian Airlines`,
         pilotName: faker.name.fullName(),
         date: new Date(),
         destination: faker.address.cityName()
     };
+    socket.emit('new-flight', flightInfo);
     console.log(`Manager: new flight with ID (${flightInfo.id}) have been scheduled Flight.`);
-    events.emit('new-flight', flightInfo);
 }, 10000);
 
-events.on("arrived", (flightInfo) => {
+socket.on("arrived", (flightInfo) => {
     console.log(`Good job ${flightInfo.pilotName}, keep it up!`);
 });
-
